@@ -11,12 +11,46 @@
 
     <div class="body-ctn">
         <h1>Recipe Book</h1>
-        <input type="text" placeholder="type in your ingredients here">
-        <button id="searchbtn">Search</button>
+        <hr>
+
+        <div class="section-ctn">
+            <h3>Get Recipes from BookId</h3>
+            <label>BookId</label>
+            <input id="bookId" type="number" value="1"><br>
+            <button id="getBookRecipes">Get Book Recipes</button>
+            <div class="recipes-ctn">
+                <div class="recipeCard" id="card1">
+                    <div class="title">Food Title</div>
+                    <div class="description">Food Description</div>
+                    <button class="addFavBtn">Favorite</button>
+                </div>
+            </div>
+            <div class="recipes-ctn">
+                <div class="recipeCard" id="card2">
+                    <div class="title">Food Title</div>
+                    <div class="description">Food Description</div>
+                    <button class="addFavBtn">Favorite</button>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+        <div class="section-ctn">
+            <h3>Ingredient Input Section</h3>
+            <label>Ingredients</label>
+            <input id="userInput" type="text" placeholder="type in your ingredients here">
+            <button id="searchBtn">Search</button>
+            <div class="bardOut-ctn">
+                Bard Output goes here
+            </div>
+        </div>
+
     
         <div class="book-ctn">
 
         </div>
+
         <div class="main-ctn">
             
         </div>
