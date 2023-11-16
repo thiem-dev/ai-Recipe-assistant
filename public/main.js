@@ -68,8 +68,14 @@ function initUnFavCardListeners(){
             const id = String(e.target.id).split('unfavBtn')[1]
             console.log('clicked unfavBtn id', id)
 
-            //needs recipeData to be an obj before continuing
-
+            const prompt = `Are you sure you want to delete ${bookRecipesObj[id].title} page`
+            if(confirm(prompt) === true){
+                deleteRecipePage(id)
+                console.log('deleted',id)
+            } else{
+                return; //do nothing
+            }
+            
         })
     })
 }
@@ -111,12 +117,16 @@ async function getRecipesByBookId(id){
     }
 }
 
+//TODO insert recipe page
+
 async function deleteRecipePage(id){
     let url = `${apiURL}/page/${id}`;
     console.log(`deleting recipe page id:${id} from ${url}`)
 
     try{
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: 'DELETE',
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -126,7 +136,7 @@ async function deleteRecipePage(id){
         console.log(`DELETE success`, deletedRow)
         return deletedRow;
     } catch(error) {
-        console.error('Error during POST request:', error);
+        console.error('Error during DELETE request:', error);
     }
 }
 
@@ -146,11 +156,11 @@ function renderRecipeData(){
             <div class="recipeCard" id="card${recipe.id}">
                 <div class="title">${recipe.title}</div>
                 <div class="description">${recipe.description}</div>
-                <button class="unfavBtn" id="ufrecipe${recipe.id}">Unfavorite</button>
+                <button class="unfavBtn" id="unfavBtn${recipe.id}">Unfavorite</button>
             </div>`;
     }
     recipesCtn.innerHTML = cardHTML;
-    initCardListeners();
+    initUnFavCardListeners();
 }
 
 //  ------------------------------------------------------- UTIL FUNCTIONS
