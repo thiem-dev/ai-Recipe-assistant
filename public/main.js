@@ -9,8 +9,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 let apiURL = `https://recipebook1.onrender.com/api`;
 let books = [];
 let bookRecipesObj = {};
-let personId = 1; //testing
-let bookId;
+let personId = document.querySelector('#personId').value
+let bookId = document.querySelector('#bookId').value
 
 //only for persistent buttons
 const interactiveElements = {
@@ -53,14 +53,18 @@ function initEventListeners(){
     })
 
     iElem.addCustomRecBtn.addEventListener('click', async () => {
-        const customRecipe = {
+        const customRecipeObj = {
+            personId: personId,
+            bookId: document.querySelector('#bookId').value,
             title: document.querySelector('#customRecTitle').value,
             description: document.querySelector('#customDescript').value,
             recipe: document.querySelector('#customRecipe').value,
         }
 
+        console.log('addCustomRecBtn clicked:')
+        const insertResponse = await insertRecipePage(customRecipeObj)
 
-
+        console.log('insert server response: ', insertResponse)
 
     })
 }
@@ -126,12 +130,13 @@ async function getRecipesByBookId(id){
 // for route: '/api/person/:personId/book/:bookId/page'
 async function insertRecipePage(obj){
     let url = `${apiURL}/person/${personId}/book/${bookId}/page`
+    console.log(`inserting page to ${url}`)
+    console.log('obj sent:',JSON.stringify(obj))
     try{
         const response = await fetch(url, {
-            method: POST,
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                //include other headers?
             },
             body: JSON.stringify(obj)
         });
@@ -141,10 +146,10 @@ async function insertRecipePage(obj){
         }
 
         const data = await response.json();
-        console.log(`DELETE success`, data)
+        console.log(`INSERT success`, data)
         return data;
     } catch(error) {
-        console.error('Error during DELETE request:', error);
+        console.error('Error during INSERT request:', error);
     }
 }
 
