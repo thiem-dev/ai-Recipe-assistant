@@ -100,16 +100,17 @@ app.get('/api/:personId/book', async (req, res) => {
 
 // recipe route
 
-//get recipes from book id
-app.get('/api/:personId/book', async (req, res) => {
-    const { personId } = req.params
+
+//get pages from bookId
+app.get('/api/:bookId/page', async (req, res) => {
+    const { bookId } = req.params
     try{
         const result = await pool.query(
-            `SELECT * FROM book
-            WHERE person_id = $1`, [personId]
+            `SELECT * FROM page
+            WHERE book_id = $1;`, [bookId]
         )
         if(result.rows.length === 0){
-            return res.status(400).send(`Could not create book from person ${id}`)
+            return res.status(400).send(`Could not get person's recipes ${bookId}`)
         }
         res.send(result.rows)
     } catch (error){
@@ -117,6 +118,27 @@ app.get('/api/:personId/book', async (req, res) => {
         res.status(400).json(error)
     }
 });
+
+//insert recipe page into bookId and personId
+app.post('/api/:personId/:bookId/page', async (req, res) => {
+    const { personId, bookId } = req.params;
+    const { title, description } = req.body;
+    try{
+        const result = await pool.query(
+            `INSERT INTO page (title, description, book_id, person_id) VALUES
+            ($1,$2,$3,$4)
+            RETURNING *;`, [title, description, bookId, personId]
+        );
+        if(result.rows.length === 0){
+            return res.status(400).send(`Could not insert recipe page for person ${personId}, book ${bookId}`)
+        }
+        res.send(result.rows)
+    } catch (error){
+        console.log(error)
+        res.status(400).json(error)
+    }
+});
+
 
 
 //  ------------------------------------------------------------ CATCH ALL ROUTE
