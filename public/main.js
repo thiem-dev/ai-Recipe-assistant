@@ -10,24 +10,24 @@ let apiURL = `https://recipebook1.onrender.com/api`;
 let books = [];
 let bookRecipesObj = {};
 let personId = 1; //testing
-// let bookId = 1;
+let bookId;
 
 //only for persistent buttons
 const interactiveElements = {
     searchBtn: `#searchBtn`,
-    getBookRecipes: `#getBookRecipes`
+    getBookRecipes: `#getBookRecipes`,
+    addCustomRecBtn: `#addCustomRecBtn`
 }
 
 const iElem = interactiveElements;
 
 
-//-------------------------------------------------------- INIT
+//-------------------------------------------------------- INIT ON LOAD
 async function init(){
     initQselectors()
     initEventListeners();
     initUnFavCardListeners();
     initFavCardListeners();
-    // bookData = await getData(apiURL)
 }
 
 function initQselectors(){
@@ -37,40 +37,41 @@ function initQselectors(){
 }
 
 function initEventListeners(){
-
     iElem.getBookRecipes.addEventListener('click', async () => {
-        const bookId = document.querySelector('#bookId').value
+        bookId = document.querySelector('#bookId').value
         console.log(`getBookRecipes clicked bookId: ${bookId}`)
 
-        let bookRecipesArr = []
-        bookRecipesArr = await getRecipesByBookId(bookId)
-        console.log(`bookRecipes ${bookRecipesArr}`)
-        bookRecipesObj = convertArrToObj(bookRecipesArr);
+        bookRecipesObj = convertArrToObj(await getRecipesByBookId(bookId));
         console.log(bookRecipesObj)
         renderRecipeData();
     })
 
     iElem.searchBtn.addEventListener('click', async () => {
         const userInput = document.querySelector('#userInput').value
-
         console.log(`search clicked`);
         console.log(`userInput ${userInput}`)
-
     })
 
+    iElem.addCustomRecBtn.addEventListener('click', async () => {
+        const recipeTitle = document.querySelector('#customRecTitle').value;
+        const recipeDetails = document.querySelector('#customRecDetails').value;
+
+
+    })
 }
 
 function initUnFavCardListeners(){
     const unfavBtnElements = document.querySelectorAll('.unfavBtn')
 
     unfavBtnElements.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click',  async (e) => {
             const id = String(e.target.id).split('unfavBtn')[1]
             console.log('clicked unfavBtn id', id)
 
             const prompt = `Are you sure you want to delete ${bookRecipesObj[id].title} page`
             if(confirm(prompt) === true){
                 deleteRecipePage(id)
+                e.target.parentElement.classList.add('hideCard') //hides it from user without querying server
                 console.log('deleted',id)
             } else{
                 return; //do nothing
@@ -99,6 +100,7 @@ function initFavCardListeners(){
 
 // for route: /api/book/:bookId/pages
 async function getRecipesByBookId(id){
+
     let url = `${apiURL}/book/${id}/pages`
     console.log(`getting from recipes from ${url}`)
 
@@ -118,6 +120,7 @@ async function getRecipesByBookId(id){
 }
 
 //TODO insert recipe page
+
 
 async function deleteRecipePage(id){
     let url = `${apiURL}/page/${id}`;
