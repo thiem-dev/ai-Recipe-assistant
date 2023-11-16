@@ -23,11 +23,11 @@ app.use(express.static('public'))
 //  ------------------------------------------------------------ API ROUTES
 
 
-app.get('/api/user', async(req, res) => {
+app.get('/api/person', async(req, res) => {
     
     try{
         const result = await pool.query(
-            `SELECT * FROM users`
+            `SELECT * FROM person`
         );
         res.status(201).send(result.rows)
     } catch (error){
