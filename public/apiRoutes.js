@@ -102,7 +102,7 @@ app.get('/api/:personId/book', async (req, res) => {
 
 
 //get pages from bookId
-app.get('/api/:bookId/page', async (req, res) => {
+app.get('/api/book/:bookId/pages', async (req, res) => {
     const { bookId } = req.params
     try{
         const result = await pool.query(
@@ -120,7 +120,7 @@ app.get('/api/:bookId/page', async (req, res) => {
 });
 
 //insert recipe page into bookId and personId
-app.post('/api/:personId/:bookId/page', async (req, res) => {
+app.post('/api/person/:personId/book/:bookId/page', async (req, res) => {
     const { personId, bookId } = req.params;
     const { title, description } = req.body;
     try{

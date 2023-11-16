@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-let apiURL = `https://recipebook1.onrender.com/`;
+let apiURL = `https://recipebook1.onrender.com/api/`;
 let books = [];
 let bookRecipesObj = {};
 let personId = 1; //testing
@@ -74,8 +74,9 @@ function initCardListeners(){
 
 //  ------------------------------------------------------- API ROUTE FUNCTIONS
 
+// for route: /api/book/:bookId/pages
 async function getRecipesByBookId(id){
-    let url = `${apiURL}/${bookId}`
+    let url = `${apiURL}/book/${bookId}/pages`
     console.log(`getting from recipes from ${url}`)
 
     try{
