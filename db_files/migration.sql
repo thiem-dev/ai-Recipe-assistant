@@ -1,4 +1,4 @@
--- DROP TABLE IF EXISTS person, page, book;
+DROP TABLE IF EXISTS person, page, book;
 
 -- Create tables
 CREATE TABLE person (
