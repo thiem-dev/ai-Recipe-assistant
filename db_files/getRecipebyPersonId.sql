@@ -5,7 +5,8 @@ SELECT
     book.bk_name,
     -- page.id AS recipe_id,
     page.title,
-    page.description
+    page.description,
+    page.recipe
 FROM
     person
 JOIN

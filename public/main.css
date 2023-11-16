@@ -12,6 +12,10 @@ hr{
     height: 10px;
 }
 
+.description{
+    overflow:hidden;
+}
+
 .hideCard{
     display:none;
 }

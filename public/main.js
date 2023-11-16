@@ -53,8 +53,13 @@ function initEventListeners(){
     })
 
     iElem.addCustomRecBtn.addEventListener('click', async () => {
-        const recipeTitle = document.querySelector('#customRecTitle').value;
-        const recipeDetails = document.querySelector('#customRecDetails').value;
+        const customRecipe = {
+            title: document.querySelector('#customRecTitle').value,
+            description: document.querySelector('#customDescript').value,
+            guide: document.querySelector('#customRecGuide').value,
+        }
+
+
 
 
     })
@@ -100,7 +105,6 @@ function initFavCardListeners(){
 
 // for route: /api/book/:bookId/pages
 async function getRecipesByBookId(id){
-
     let url = `${apiURL}/book/${id}/pages`
     console.log(`getting from recipes from ${url}`)
 
@@ -119,8 +123,10 @@ async function getRecipesByBookId(id){
     }
 }
 
-//TODO insert recipe page
-
+// for route: '/api/person/:personId/book/:bookId/page'
+async function insertRecipePage(obj){
+    let url 
+}
 
 async function deleteRecipePage(id){
     let url = `${apiURL}/page/${id}`;
