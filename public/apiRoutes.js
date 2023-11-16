@@ -139,6 +139,7 @@ app.post('/api/person/:personId/book/:bookId/page', async (req, res) => {
     }
 });
 
+//delete recipe page
 app.delete('/api/page/:pageId', async (req, res) => {
     const { pageId } = req.params;
     try{
