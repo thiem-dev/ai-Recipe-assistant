@@ -1,16 +1,16 @@
 import express from 'express';
 import pg from 'pg';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const { Pool } = pg;
 const apiPort = process.env.PORT || 3000;
 const app = express();
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl:{
-        require:true
-    }
+    connectionString: process.env.DB_URL,
 });
 
 //  ------------------------------------------------------------ MIDDLEWARE
