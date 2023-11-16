@@ -21,7 +21,7 @@
         <hr>
 
         <div class="section-ctn">
-            <h3>Get Recipes from BookId</h3>
+            <h3>Get Recipes from BookId : userId current set as 1</h3>
             <label>BookId</label>
             <input id="bookId" type="number" value="1"><br>
             <button id="getBookRecipes">Get Book Recipes</button>
@@ -38,13 +38,12 @@
                 </div>
             </div>
         </div>
-
-
         <hr>
         <div class="section-ctn">
             <h3>Ingredient Input Section</h3>
-            <label>Ingredients</label>
-            <input id="userInput" type="text" placeholder="type in your ingredients here">
+            <label>Input your Ingredients</label><br>
+            <textarea id="ingredientInput" name="ingredientInput" rows="4" cols="100" placeholder="carrots, chicken, potatoes..."></textarea><br>
+            <!-- <input id="userInput" type="text" placeholder="type in your ingredients here"> -->
             <button id="searchBtn">Search</button>
             <div class="bardOut-ctn">
                 <h3>Bard Output goes here</h3>
@@ -55,9 +54,44 @@
                 </div>
             </div>
         </div>
-
         <hr>
-    
+
+        <div class="section-ctn">
+            <h3>Custom Recipe from user</h3>
+            <label>Custom Recipe Title</label>
+            <input id="customRecTitle" type="text" value="Chicken Shawarma" placeholder="Recipe Title"><br>
+            <label>Input your recipe steps</label><br>
+            <textarea id="customRecDetails" name="customRecDetails" rows="30" cols="150" placeholder="carrots, chicken, potatoes...">
+                Instructions:
+                        Marinate the Chicken:
+
+                        In a bowl, combine all the marinade ingredients.
+                        Add the sliced chicken thighs to the marinade, making sure each piece is well coated.
+                        Cover the bowl and let it marinate in the refrigerator for at least 1-2 hours, or preferably overnight.
+                        Cook the Chicken:
+
+                        Preheat your oven to 425°F (220°C).
+                        Spread the marinated chicken slices on a baking sheet lined with parchment paper.
+                        Bake for 20-25 minutes or until the chicken is cooked through and slightly crispy on the edges.
+                        Prepare the Yogurt Sauce:
+
+                        In a small bowl, mix together the yogurt, tahini, lemon juice, minced garlic, and salt. Adjust the seasoning to taste.
+                        Assemble the Shawarma:
+
+                        Warm the pita bread or flatbreads.
+                        Place a generous amount of cooked chicken on each bread.
+                        Top with sliced tomatoes, cucumbers, red onions, and lettuce.
+                        Drizzle the yogurt sauce over the top and sprinkle with fresh parsley.
+                        Add hot sauce if desired.
+                        Serve and Enjoy:
+
+                        Roll up the shawarma, and it's ready to be served! You can also serve it open-faced or in a bowl if you prefer.
+            </textarea><br>
+            <button id="addCustomRecBtn">Add to Book</button><br>
+        </div>
+
+
+
         <div class="book-ctn">
             
         </div>
