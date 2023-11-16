@@ -9,8 +9,15 @@
 </head>
 <body>
 
+    <h1>Load the recipes first, no first init for some buttons</h1>
     <div class="body-ctn">
         <h1>Recipe Book</h1>
+
+
+        <div class="section-ctn">
+            <h3>Navigation Ctn</h3>
+        </div>
+
         <hr>
 
         <div class="section-ctn">
@@ -19,17 +26,15 @@
             <input id="bookId" type="number" value="1"><br>
             <button id="getBookRecipes">Get Book Recipes</button>
             <div class="recipes-ctn">
-                <div class="recipeCard" id="card1">
+                <div class="recipeCard">
                     <div class="title">Food Title</div>
                     <div class="description">Food Description</div>
-                    <button class="addFavBtn">Favorite</button>
+                    <button class="unfavBtn" id="unfavBtn1">Unfavorite</button>
                 </div>
-            </div>
-            <div class="recipes-ctn">
-                <div class="recipeCard" id="card2">
+                <div class="recipeCard">
                     <div class="title">Food Title</div>
                     <div class="description">Food Description</div>
-                    <button class="addFavBtn">Favorite</button>
+                    <button class="unfavBtn" id="unfavBtn2">Unfavorite</button>
                 </div>
             </div>
         </div>
@@ -42,13 +47,19 @@
             <input id="userInput" type="text" placeholder="type in your ingredients here">
             <button id="searchBtn">Search</button>
             <div class="bardOut-ctn">
-                Bard Output goes here
+                <h3>Bard Output goes here</h3>
+                <div class="recipeCard">
+                    <div class="title">Food Title</div>
+                    <div class="description">Food Description</div>
+                    <button class="favBardBtn" id="favBardBtn1">Favorite</button>
+                </div>
             </div>
         </div>
 
+        <hr>
     
         <div class="book-ctn">
-
+            
         </div>
 
         <div class="main-ctn">

@@ -6,11 +6,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-let apiURL = `https://recipebook1.onrender.com/api/`;
+let apiURL = `https://recipebook1.onrender.com/api`;
 let books = [];
 let bookRecipesObj = {};
 let personId = 1; //testing
-let bookId = 1;
+// let bookId = 1;
 
 //only for persistent buttons
 const interactiveElements = {
@@ -25,6 +25,8 @@ const iElem = interactiveElements;
 async function init(){
     initQselectors()
     initEventListeners();
+    initUnFavCardListeners();
+    initFavCardListeners();
     // bookData = await getData(apiURL)
 }
 
@@ -35,36 +37,51 @@ function initQselectors(){
 }
 
 function initEventListeners(){
-    iElem.searchBtn.addEventListener('click', async () => {
-        const userInput = document.querySelector('#userInput').value
-
-        console.log(`search clicked`);
-        console.log(`userInput ${userInput}`)
-    })
 
     iElem.getBookRecipes.addEventListener('click', async () => {
         const bookId = document.querySelector('#bookId').value
         console.log(`getBookRecipes clicked bookId: ${bookId}`)
 
-        const bookRecipesArr = []
+        let bookRecipesArr = []
         bookRecipesArr = await getRecipesByBookId(bookId)
-        console.log(bookRecipesArr)
-        // bookRecipesObj = convertArrToObj(bookRecipesArr);
-        // console.log(bookRecipesObj)
+        console.log(`bookRecipes ${bookRecipesArr}`)
+        bookRecipesObj = convertArrToObj(bookRecipesArr);
+        console.log(bookRecipesObj)
+        renderRecipeData();
+    })
+
+    iElem.searchBtn.addEventListener('click', async () => {
+        const userInput = document.querySelector('#userInput').value
+
+        console.log(`search clicked`);
+        console.log(`userInput ${userInput}`)
+
     })
 
 }
 
-//init listeners favBtn for cards
-function initCardListeners(){
-    const favBtnElements = document.getquerySelectorAll('.addFavBtn')
+function initUnFavCardListeners(){
+    const unfavBtnElements = document.querySelectorAll('.unfavBtn')
 
+    unfavBtnElements.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = String(e.target.id).split('unfavBtn')[1]
+            console.log('clicked unfavBtn id', id)
 
-    
+            //needs recipeData to be an obj before continuing
+
+        })
+    })
+}
+
+function initFavCardListeners(){
+    const favBtnElements = document.querySelectorAll('.favBardBtn')
+
     favBtnElements.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const id = String(e.target.parentElement.id).split('card')[1]
-            console.log('card id', id)
+            // const id = String(e.target.parentElement.id).split('cardBard')[1]
+            const id = String(e.target.id).split('favBardBtn')[1]
+            console.log('clicked favBardBtn id', id)
 
             //needs recipeData to be an obj before continuing
 
@@ -76,7 +93,7 @@ function initCardListeners(){
 
 // for route: /api/book/:bookId/pages
 async function getRecipesByBookId(id){
-    let url = `${apiURL}/book/${bookId}/pages`
+    let url = `${apiURL}/book/${id}/pages`
     console.log(`getting from recipes from ${url}`)
 
     try{
@@ -93,10 +110,47 @@ async function getRecipesByBookId(id){
         console.error('Error during POST request:', error);
     }
 }
+
+async function deleteRecipePage(id){
+    let url = `${apiURL}/page/${id}`;
+    console.log(`deleting recipe page id:${id} from ${url}`)
+
+    try{
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const deletedRow = await response.json();
+        console.log(`DELETE success`, deletedRow)
+        return deletedRow;
+    } catch(error) {
+        console.error('Error during POST request:', error);
+    }
+}
+
 //  ------------------------------------------------------- RENDER FUNCTIONS
 
-function renderData(obj){
+function renderRecipeData(){
+    const recipesCtn = document.querySelector('.recipes-ctn')
+    // const recipe = bookRecipesObj;
 
+    recipesCtn.innerHTML = ``
+    let cardHTML = ``
+
+
+    for(let [indexR, recipe] of Object.entries(bookRecipesObj)){
+        // console.log(`recipe`, recipe.title)
+        cardHTML += `
+            <div class="recipeCard" id="card${recipe.id}">
+                <div class="title">${recipe.title}</div>
+                <div class="description">${recipe.description}</div>
+                <button class="unfavBtn" id="ufrecipe${recipe.id}">Unfavorite</button>
+            </div>`;
+    }
+    recipesCtn.innerHTML = cardHTML;
+    initCardListeners();
 }
 
 //  ------------------------------------------------------- UTIL FUNCTIONS
