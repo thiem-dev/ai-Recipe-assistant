@@ -6,3 +6,12 @@
 .recipeCard {
     border: 1px solid black;
 }
+
+hr{
+    background-color: #0a4f1a;
+    height: 10px;
+}
+
+.hideCard{
+    display:none;
+}
