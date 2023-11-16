@@ -56,7 +56,7 @@ function initEventListeners(){
         const customRecipe = {
             title: document.querySelector('#customRecTitle').value,
             description: document.querySelector('#customDescript').value,
-            guide: document.querySelector('#customRecGuide').value,
+            recipe: document.querySelector('#customRecipe').value,
         }
 
 
@@ -115,9 +115,9 @@ async function getRecipesByBookId(id){
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const bookRecipes = await response.json();
-        console.log('GET success', bookRecipes)
-        return bookRecipes;
+        const data = await response.json();
+        console.log('GET success', data)
+        return data;
     } catch(error) {
         console.error('Error during POST request:', error);
     }
@@ -125,9 +125,30 @@ async function getRecipesByBookId(id){
 
 // for route: '/api/person/:personId/book/:bookId/page'
 async function insertRecipePage(obj){
-    let url 
+    let url = `${apiURL}/person/${personId}/book/${bookId}/page`
+    try{
+        const response = await fetch(url, {
+            method: POST,
+            headers: {
+                'Content-Type': 'application/json',
+                //include other headers?
+            },
+            body: JSON.stringify(obj)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(`DELETE success`, data)
+        return data;
+    } catch(error) {
+        console.error('Error during DELETE request:', error);
+    }
 }
 
+// for route: '/api/page/:pageId',
 async function deleteRecipePage(id){
     let url = `${apiURL}/page/${id}`;
     console.log(`deleting recipe page id:${id} from ${url}`)
@@ -141,9 +162,9 @@ async function deleteRecipePage(id){
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const deletedRow = await response.json();
-        console.log(`DELETE success`, deletedRow)
-        return deletedRow;
+        const data = await response.json();
+        console.log(`DELETE success`, data)
+        return data;
     } catch(error) {
         console.error('Error during DELETE request:', error);
     }
