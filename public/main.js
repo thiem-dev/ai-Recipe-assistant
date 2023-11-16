@@ -9,8 +9,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 let apiURL = `https://recipebook1.onrender.com/api`;
 let books = [];
 let bookRecipesObj = {};
-let personId = document.querySelector('#personId').value
-let bookId = document.querySelector('#bookId').value
+let personId = document.querySelector('#personId').value;
+let bookId = document.querySelector('#bookId').value;
 
 //only for persistent buttons
 const interactiveElements = {
@@ -54,7 +54,7 @@ function initEventListeners(){
 
     iElem.addCustomRecBtn.addEventListener('click', async () => {
         const customRecipeObj = {
-            personId: personId,
+            personId: document.querySelector('#personId').value,
             bookId: document.querySelector('#bookId').value,
             title: document.querySelector('#customRecTitle').value,
             description: document.querySelector('#customDescript').value,
@@ -129,8 +129,9 @@ async function getRecipesByBookId(id){
 
 // for route: '/api/person/:personId/book/:bookId/page'
 async function insertRecipePage(obj){
-    let url = `${apiURL}/person/${personId}/book/${bookId}/page`
-    console.log(`inserting page to ${url}`)
+    let url = `${apiURL}/page`;
+    console.log(`inserting page to ${url}`);
+    console.log(obj)
     console.log('obj sent:',JSON.stringify(obj))
     try{
         const response = await fetch(url, {
