@@ -120,9 +120,8 @@ app.get('/api/book/:bookId/pages', async (req, res) => {
 });
 
 //insert recipe page into bookId and personId
-app.post('/api/person/:personId/book/:bookId/page', async (req, res) => {
-    const { personId, bookId } = req.params;
-    const { title, description, recipe } = req.body;
+app.post('/api/page', async (req, res) => {
+    const { personId, bookId, title, description, recipe } = req.body;
     try{
         const result = await pool.query(
             `INSERT INTO page (title, description, book_id, person_id) VALUES
