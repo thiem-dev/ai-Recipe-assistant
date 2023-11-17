@@ -26,7 +26,7 @@ const iElem = interactiveElements;
 async function init(){
     initQselectors()
     initEventListeners();
-    initUnFavCardListeners();
+    userRecipeCardListeners();
     initFavCardListeners();
 }
 
@@ -69,8 +69,18 @@ function initEventListeners(){
     })
 }
 
-function initUnFavCardListeners(){
+function userRecipeCardListeners(){
+    const seeRecipeElements = document.querySelectorAll('.seeRecipeBtn')
     const unfavBtnElements = document.querySelectorAll('.unfavBtn')
+    
+    seeRecipeElements.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const id = String(e.target.id).split('seeRecipeBtn')[1]
+            console.log('clicked seeRecipe id', id)
+            renderModalData(id);
+            openModal();
+        })
+    })
 
     unfavBtnElements.forEach(btn => {
         btn.addEventListener('click',  async (e) => {
@@ -88,6 +98,8 @@ function initUnFavCardListeners(){
             
         })
     })
+
+
 }
 
 function initFavCardListeners(){
@@ -186,17 +198,35 @@ function renderRecipeData(){
     let cardHTML = ``
 
 
-    for(let [indexR, recipe] of Object.entries(bookRecipesObj)){
+    for(let [indexR, bkPage] of Object.entries(bookRecipesObj)){
         // console.log(`recipe`, recipe.title)
         cardHTML += `
-            <div class="recipeCard" id="card${recipe.id}">
-                <div class="title">${recipe.title}</div>
-                <div class="description">${recipe.description}</div>
-                <button class="unfavBtn" id="unfavBtn${recipe.id}">Unfavorite</button>
+            <div class="recipeCard" id="card${bkPage.id}">
+                <div class="title">${bkPage.title}</div>
+                <div class="description">${bkPage.description}</div>
+                <button class="seeRecipe" id="seeRecipeBtn${bkPage.id}">See Recipe</button>
+                <button class="unfavBtn" id="unfavBtn${bkPage.id}">Unfavorite</button>
             </div>`;
     }
     recipesCtn.innerHTML = cardHTML;
-    initUnFavCardListeners();
+    userRecipeCardListeners();
+}
+
+function renderModalData(id){
+    // bookRecipesObj
+    const modalCtn = document.querySelector('modal-content')
+    const bkPage = bookRecipesObj[id]
+    modalCtn.innerHTML = ``
+    let recipePageHTML = `
+                <h2 class="title-mdl">${bkPage.title}</h2>
+                <div class="description-mdl">
+                    ${bkPage.description}
+                </div>
+                <div class="recipe-mdl">
+                    ${bkPage.recipe}
+                </div>
+            `;
+    modalCtn.innerHTML=recipePageHTML;
 }
 
 //  ------------------------------------------------------- UTIL FUNCTIONS
@@ -212,4 +242,30 @@ function convertArrToObj(arr){
     });
 
     return objectById
+}
+
+
+// ------------------------------------------------------------- MODAL FUNCTIONS
+
+// TODO: toggle the class instead
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+
+const modal = document.getElementById('myModal');
+const span = document.getElementsByClassName('close')[0];
+
+span.onclick = function() {
+  closeModal();
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    closeModal();
+  }
 }
