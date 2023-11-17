@@ -71,6 +71,7 @@ function initEventListeners(){
 
 function userRecipeCardListeners(){
     const seeRecipeElements = document.querySelectorAll('.seeRecipeBtn')
+    console.log(seeRecipeElements)
     const unfavBtnElements = document.querySelectorAll('.unfavBtn')
     
     seeRecipeElements.forEach(btn => {
@@ -80,7 +81,7 @@ function userRecipeCardListeners(){
             renderModalData(id);
             openModal();
         })
-    })
+    });
 
     unfavBtnElements.forEach(btn => {
         btn.addEventListener('click',  async (e) => {
@@ -204,7 +205,7 @@ function renderRecipeData(){
             <div class="recipeCard" id="card${bkPage.id}">
                 <div class="title">${bkPage.title}</div>
                 <div class="description">${bkPage.description}</div>
-                <button class="seeRecipe" id="seeRecipeBtn${bkPage.id}">See Recipe</button>
+                <button class="seeRecipeBtn" id="seeRecipeBtn${bkPage.id}">See Recipe</button>
                 <button class="unfavBtn" id="unfavBtn${bkPage.id}">Unfavorite</button>
             </div>`;
     }
@@ -214,14 +215,16 @@ function renderRecipeData(){
 
 function renderModalData(id){
     // bookRecipesObj
-    const modalCtn = document.querySelector('modal-content')
+    const modalCtn = document.querySelector('.modal-content')
     const bkPage = bookRecipesObj[id]
-    modalCtn.innerHTML = ``
+    modalCtn.innerHTML = ``;
     let recipePageHTML = `
                 <h2 class="title-mdl">${bkPage.title}</h2>
+                <h3>Description:</h3>
                 <div class="description-mdl">
                     ${bkPage.description}
-                </div>
+                </div><br>
+                <h4>Recipe:</h4>
                 <div class="recipe-mdl">
                     ${bkPage.recipe}
                 </div>
