@@ -96,24 +96,37 @@ function userRecipeCardListeners(){
             } else{
                 return; //do nothing
             }
-            
         })
     })
-
-
 }
+
+
+// const customRecipeObj = {
+//     personId: document.querySelector('#personId').value,
+//     bookId: document.querySelector('#bookId').value,
+//     title: document.querySelector('#customRecTitle').value,
+//     description: document.querySelector('#customDescript').value,
+//     recipe: document.querySelector('#customRecipe').value,
+// }
+
+// console.log('addCustomRecBtn clicked:')
+
 
 function initFavCardListeners(){
     const favBtnElements = document.querySelectorAll('.favBardBtn')
 
     favBtnElements.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', async (e) => {
             // const id = String(e.target.parentElement.id).split('cardBard')[1]
-            const id = String(e.target.id).split('favBardBtn')[1]
-            console.log('clicked favBardBtn id', id)
+            const recipeId = String(e.target.id).split('favBardBtn')[1];
+            const bookId = document.querySelector('#bookId').value;
+            console.log('disabled until bard done, clicked favBardBtn recipe id, bookid', recipeId, bookId);
 
             //needs recipeData to be an obj before continuing
-
+            
+            // const insertResponse = await insertRecipePage(bookRecipesObj[recipeId])
+            bookRecipesObj = await getRecipesByBookId(recipeId);
+            await renderRecipeData();
         })
     })
 }
@@ -124,14 +137,11 @@ function initFavCardListeners(){
 async function getRecipesByBookId(id){
     let url = `${apiURL}/book/${id}/pages`
     console.log(`getting from recipes from ${url}`)
-
     try{
         const response = await fetch(url);
-
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
         console.log('GET success', data)
         return data;
@@ -145,7 +155,6 @@ async function insertRecipePage(obj){
     let url = `${apiURL}/page`;
     console.log(`inserting page to ${url}`);
     console.log(obj)
-    console.log('obj sent:',JSON.stringify(obj))
     try{
         const response = await fetch(url, {
             method: 'POST',
