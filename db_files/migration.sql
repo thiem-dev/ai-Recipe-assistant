@@ -10,7 +10,7 @@ CREATE TABLE book (
     id SERIAL PRIMARY KEY,
     bk_name VARCHAR,
     person_id INT,
-    FOREIGN KEY (person_id) REFERENCES person(id),
+    FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE,
     UNIQUE (id, person_id)
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE page (
     recipe TEXT,
     book_id INT,
     person_id INT,
-    FOREIGN KEY (book_id, person_id) REFERENCES book(id, person_id)
+    FOREIGN KEY (book_id, person_id) REFERENCES book(id, person_id) ON DELETE CASCADE
 );
 
 -- Insert statements
