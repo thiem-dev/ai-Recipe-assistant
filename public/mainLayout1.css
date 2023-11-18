@@ -24,7 +24,7 @@
     font-family: 'DM Sans', sans-serif;
 }
 
-
+/* ------------------------------------------------------------------------ NAV CONTENT */
 .topNavCtn{
     display:flex;
     flex-flow: row wrap;
@@ -66,7 +66,7 @@
     color: var(--main-color);
 }
 
-/* main holder of content */
+/* ------------------------------------------------------------------------ MAIN CONTENT */
 .contentCtn{
     width:90%;
     margin: 2rem auto;
@@ -84,6 +84,7 @@
 }
 
 
+/*-------------------------------------------------------------------- UTILITY CLASSES */
 
 .hide{
     visibility: hidden;
@@ -94,7 +95,7 @@
 }
 
 
-/* MODAL CSS */
+/* ------------------------------------------------------------------------ MODAL CONTENT */
 
 .modal {
     display: none;
