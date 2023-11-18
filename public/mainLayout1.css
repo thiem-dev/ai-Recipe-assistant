@@ -1,0 +1,131 @@
+/* https://coolors.co/image-picker */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz@0,9..40;1,9..40&display=swap');
+
+:root{
+    /* CSS HEX */
+    --main-color: #A8CA22ff;
+    --accent1: rgba(168, 202, 34, 0.712);
+    --accent2: rgba(168, 202, 34, 0.39);
+    --main-color2: #EBCA3B;
+    --main-color3: #7EEB3B;
+    --bg1: #222222ff;
+    --bg1-offset: rgb(180, 180, 180);
+    --bg2: #2D2D2Dff;
+    --bg-accent1: #4C4C4Cff;
+    --bg-accent2: rgba(76, 76, 76, 0.692);
+}
+
+/* sets all to defaults */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+}
+
+
+.topNavCtn{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: var(--bg1);
+    color: var(--bg1-offset);
+    align-items: center;
+    padding:1rem;
+}
+
+.logo{
+    width:2.5rem;
+ }
+
+.topNavCtn h1{
+    font-size:2rem;
+    margin-left:2rem;
+}
+
+.subText{
+    font-size:.75rem;
+    opacity: 50%;
+}
+
+.navList{
+    list-style: none;
+    display:flex;
+    margin-right:2rem;
+    gap:2rem;
+}
+
+.navItems{
+    font-size:1.5rem;
+    transition: .5s color ease;
+}
+
+.navItems:hover{
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+/* main holder of content */
+.contentCtn{
+    width:90%;
+    margin: 2rem auto;
+    display:flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.recipeTitle{
+    font-size: 3rem;
+}
+
+.recipeImg{
+    width:30rem;
+}
+
+
+
+.hide{
+    visibility: hidden;
+}
+
+.hideCard{
+    display:none;
+}
+
+
+/* MODAL CSS */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
