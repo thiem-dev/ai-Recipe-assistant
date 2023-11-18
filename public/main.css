@@ -1,7 +1,21 @@
+/* https://coolors.co/image-picker */
+
+:root{
+    /* CSS HEX */
+    --yellow-green: #A8CA22ff;
+    --eerie-black: #222222ff;
+    --jet: #2D2D2Dff;
+    --eerie-black-2: #222222ff;
+    --davys-gray: #4C4C4Cff;
+}
+
 *{
     /* border: 1px solid black; */
     /* margin: 1rem; */
 }
+
+
+
 
 .body-ctn *{
     margin: 1rem;
