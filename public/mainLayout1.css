@@ -71,15 +71,16 @@
 }
 
 /* user svg container */
-#iconItem{
+#userIcon{
     /* background-color: var(--bg-accent1); */
     padding: .25rem .5rem;
     margin: auto;
     border-radius: 5rem;
+    background-color: rgba(255, 255, 255, 0.068);
     transition: background-color .5s ease;
 }
 
-#iconItem:hover{
+#userIcon:hover{
     background-color: var(--main-color);
 }
 
@@ -91,12 +92,31 @@
 }
 
 
-
 /* ------------------------------------------------------------------------ MAIN CONTENT */
 
 .mainCtn{
     display:flex;
 }
+
+/* --------------------------------- INPUT CTN */
+.userInputCtn{
+    display:flex;
+    flex-flow:column wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#searchBtn{
+    padding:1rem;
+}
+
+#ingredientInput{
+    background-color: rgba(128, 128, 128, 0.253);
+    border-radius:1rem;
+    padding:1rem;
+}
+
+/* ------------------------------ CONTENT CTN */
 
 .contentCtn{
     margin: 2rem auto;
@@ -104,6 +124,12 @@
     flex-flow: column wrap;
     align-items: center;
     flex: 1;
+}
+
+#recipeDisplayCtn{
+    display:flex;
+    flex-flow: column wrap;
+    align-items: center;
 }
 
 
@@ -130,6 +156,8 @@
 
 .ingredients{
     margin-top: 2rem;
+    list-style-type: none;
+
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
@@ -146,6 +174,8 @@ hr.divider1{
 .recipeInstructions{
     margin-top:3rem;
     font-size: 1rem;
+    list-style-type: none;
+
 }
 .recipeInstructions li{
 
@@ -154,7 +184,7 @@ hr.divider1{
 /* TODO make the animation properties into a separate class and duplicate the heart */
 
 /* heart icon stuff */
-#heart-icon{
+#heartIcon{
     /* fill:red; */
     position:absolute;
     top:1rem;
@@ -163,30 +193,77 @@ hr.divider1{
     color: white;
     text-shadow:2px 2px 5px #6d6d6d;
     cursor: pointer;
+
+
+
     transition: .5s all ease;
 }
 
-#heart-icon:hover {
+#heartIcon:hover {
     color: var(--main-color)
 }
 
-#heart-icon:active {
+#heartIcon:active {
     color:red;
-    animation-name: heartFly;
+    /* animation-name: heartFly; */
     animation-duration: 1s;
 }
 
-/* -------------------------------------------------------------- SAVED GALLERY  */
+/* -------------------------------------------------------------- ASIDE SAVED GALLERY  */
 
 .savedGallery{
+    margin-top: 2rem;
+    margin-right: 1rem;
+    padding:1rem;
+    gap: 1rem;
     display:flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     flex-basis: 200px;
+    background-color: var(--accent2);
+    border-radius: 2rem;
+    height:100vh;
+    overflow-y: auto;
+}
+aside::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar in WebKit browsers */
+  }
+
+.savedGallery .thumbCard{
+    scale:100%;
+    display:flex;
+    flex-flow:column wrap;
+    align-items: center;
+    
+    /* for heart icon */
+    position:relative;
+
+    transition: .5s scale ease ; 
+}
+
+.savedGallery .thumbCard:hover{
+    scale: 107%;
+
 }
 
 .imgThumb{
-    width:100px
+    width:120px;
+    height:120px;
+    object-position:50% 50%;
+    object-fit:cover;
+    border-radius: .5rem;
 }
+
+/* #heart-iconThumb{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:2rem;
+    color: red;
+    text-shadow:2px 2px 5px #6d6d6d;
+    cursor: pointer;
+    transition: .5s all ease;
+} */
+
 
 
 /*-------------------------------------------------------------------- UTILITY CLASSES */
@@ -195,15 +272,14 @@ hr.divider1{
     display:none
 }
 
-.hideCard{
+/* .hideCard{
     display:none;
-}
+} */
 
 
 /* ------------------------------------------------------------------------ MODAL CONTENT */
 
 .modal {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -212,15 +288,25 @@ hr.divider1{
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
+
+}
+
+.img-mdl{
+    width:35vw;
 }
 
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
-    padding: 20px;
+    padding: 2rem;
     border: 1px solid #888;
+    border-radius: 2rem;
     width: 80%;
     position: relative;
+    display:flex;
+    align-items: center;
+    flex-flow: column wrap;
+    justify-content: center;
 }
 
 .close {
@@ -236,9 +322,14 @@ hr.divider1{
     cursor: pointer;
 }
 
+.unfavBtn{
+    padding: 1rem;
+    margin-top: 2rem;
+}
 
 
-/* ANIMATION KEYFRAMES */
+
+/*------------------------------------------------------------------------- ANIMATION KEYFRAMES */
 
 @keyframes heartFly {
     0% {
@@ -254,6 +345,6 @@ hr.divider1{
       transform: translateY(-30px) scale(1.1);
     }  */
     100% {
-      transform: translateX(500px) translateY(-50px) scale(0.2);
+        transform: translateX(100vw) translateY(-50px) scale(0.2);
     }
 }

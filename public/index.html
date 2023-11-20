@@ -4,125 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ai Recipe Book</title>
-    <script defer src="./main.js"></script>
-    <link rel="stylesheet" href="./main.css">
+    <script defer src="./main2.js"></script>
+    <link rel="stylesheet" href="./mainLayout1.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,200" />
 </head>
 <body>
 
-    <h1>Load the recipes first, no first init for some buttons</h1>
-    <div class="body-ctn">
-        <h1>Recipe Book</h1>
-
-
-        <div class="section-ctn">
-            <h3>Navigation Ctn</h3>
+    <nav class="topNavCtn">
+        <div class="navBox1">
+            <img class="logo" src="../assets/recipeLogo1.png"></img>
+            Recipe Hero 
+            <span class="subText">Ai-powered CookBook</span>
         </div>
+        <ul class="navBox2">
+            <!-- <li class="navItems">About</li> -->
+            <!-- <li class="navItems" id="cookBookNav">CookBook</li> -->
+            <li class="navItems" id="userIcon">
+                <img src="../assets/userIconSvg.svg" alt="user icon">
+            </li>
+        </ul>
 
-        <hr>
+    </nav> <!-- end topNavCtn -->
 
-        <div class="section-ctn">
-            <h3>Get Recipes from BookId : userId current set as 1</h3>
-            <label>personId</label>
-            <input id="personId" type="number" value="1">
-            <label>BookId</label>
-            <input id="bookId" type="number" value="1"><br>
-            <button id="getBookRecipes">Get Book Recipes</button>
-            <div class="recipes-ctn">
-                <div class="recipeCard">
-                    <div class="title">Food Title</div>
-                    <div class="description">Food Description</div>
-                    <button class="seeRecipeBtn" id="seeRecipeBtn1">See Recipe</button>
-                    <button class="unfavBtn" id="unfavBtn1">Unfavorite</button>
-                </div>
-                <div class="recipeCard">
-                    <div class="title">Food Title</div>
-                    <div class="description">Food Description</div>
-                    <button class="seeRecipeBtn" id="seeRecipeBtn2">See Recipe</button>
-                    <button class="unfavBtn" id="unfavBtn2">Unfavorite</button>
+    <div class="mainCtn">
+        <div class="contentCtn">
+
+            <div class="userInputCtn">
+                <h3>Ingredient Input Section</h3>
+                <label>Input your Ingredients (if fail try again)</label><br>
+                <div class="inputArea">
+                    <textarea id="ingredientInput" name="ingredientInput" rows="4" cols="150" placeholder="carrots, chicken, potatoes..."></textarea><br>
+                    <button id="searchBtn">Search</button>
                 </div>
             </div>
-        </div>
-
-        <hr>
-
-        <div class="section-ctn">
-            <h3>Custom Recipe from user</h3>
-            <label>Custom Recipe Title</label>
-            <input id="customRecTitle" type="text" value="Chicken Shawarma" placeholder="Recipe Title"><br>
-
-            <label>Custom Recipe Title</label><br>
-            <textarea id="customDescript" name="customDescript"  rows="5" cols="50" value="something about schwarma" placeholder="short description about recipe">
-                A delicious easy to carry middle eastern food, definitely better than Greek Gyros
-            </textarea><br>
-
-            <label>Input your recipe steps</label><br>
-            <textarea id="customRecipe" name="customRecipe" rows="30" cols="150" placeholder="carrots, chicken, potatoes...">
-                Instructions:
-                        Marinate the Chicken:
-
-                        In a bowl, combine all the marinade ingredients.
-                        Add the sliced chicken thighs to the marinade, making sure each piece is well coated.
-                        Cover the bowl and let it marinate in the refrigerator for at least 1-2 hours, or preferably overnight.
-                        Cook the Chicken:
-
-                        Preheat your oven to 425°F (220°C).
-                        Spread the marinated chicken slices on a baking sheet lined with parchment paper.
-                        Bake for 20-25 minutes or until the chicken is cooked through and slightly crispy on the edges.
-                        Prepare the Yogurt Sauce:
-
-                        In a small bowl, mix together the yogurt, tahini, lemon juice, minced garlic, and salt. Adjust the seasoning to taste.
-                        Assemble the Shawarma:
-
-                        Warm the pita bread or flatbreads.
-                        Place a generous amount of cooked chicken on each bread.
-                        Top with sliced tomatoes, cucumbers, red onions, and lettuce.
-                        Drizzle the yogurt sauce over the top and sprinkle with fresh parsley.
-                        Add hot sauce if desired.
-                        Serve and Enjoy:
-
-                        Roll up the shawarma, and it's ready to be served! You can also serve it open-faced or in a bowl if you prefer.
-            </textarea><br>
-            <button id="addCustomRecBtn">Add to Book</button><br>
-        </div>
-
-        <hr>
-
-        <div class="section-ctn">
-            <h3>Ingredient Input Section</h3>
-            <label>Input your Ingredients</label><br>
-            <textarea id="ingredientInput" name="ingredientInput" rows="4" cols="100" placeholder="carrots, chicken, potatoes..."></textarea><br>
-            <!-- <input id="userInput" type="text" placeholder="type in your ingredients here"> -->
-            <button id="searchBtn">Search</button>
-            <div class="bardOut-ctn">
-                <h3>Bard Output goes here</h3>
-                <div class="recipeCard">
-                    <div class="title">Food Title</div>
-                    <div class="description">Food Description</div>
-                    <button class="favBardBtn" id="favBardBtn1">Favorite</button>
-                </div>
+    
+    
+            <div id="loadingGif" class="loading hide">
+                <h1 class="loadingTitle">Creating recipes...</h1>
+                <img src="../assets/kirby-loading.gif" alt="">
             </div>
-        </div>
-        <hr>
 
-        <button onclick="openModal()">Open Modal</button>
-        
-    </div> 
-    <!-- body-ctn end -->
+            <div id="recipeDisplayCtn">
+                <div class="recipeImgCtn">
+                    <span id="heartIcon" class="material-symbols-outlined ">favorite</span>
+                    <!-- <div class="heart-icon">&#9829</div> -->
+                    <img class="recipeImg" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
+                </div>
+                <h1 class="recipeTitle">Chicken Shawarma</h1>
+                <div class="recipeDescription">A delicious and flavorful Middle Eastern dish made with chicken, spices, and pita bread</div>
+                <hr class="divider1">
+                <h2>Ingredients</h2>
+                <ul class="ingredients">
+                    <li>"2 cups carrots, sliced",</li>
+                </ul>
+                <br><br>
+                <h2>Instructions:</h2>
+                <ul class="recipeInstructions">
+                    <li>Preheat oven to 350 degrees F (175 degrees C).</li>
+                </ul>
+            </div>
+                
+            
 
-    <div id="myModal" class="modal">
+        </div><!-- end contentCtn -->
+
+        <aside id="asideCtn" class="savedGallery">
+            <div id="thumbCard1" class="thumbCard">
+                <img class="imgThumb" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
+                <div class="thumbTitle">Chicken Swarma</div>
+            </div>
+        </aside>
+
+
+    </div> <!-- end mainCtn -->
+
+    <div id="modalOne" class="modal hide">
         <span class="close">X</span>
-        <div class="modal-content">
+        <div id="modalOneCtn" class="modal-content">
+            <img class="img-mdl" src="../assets/chickenShawarma1.jpg" alt="chicken shwarma">
             <h2 class="title-mdl">Food Title</h2>
             <h3>Description:</h3>
             <div class="description-mdl">
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
             </div><br>
-            <h4>Recipe:</h4>
-            <div class="recipe-mdl">
+            <h3>Ingredients:</h3>
+            <div class="ingredients-mdl">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            </div><br>
+            <h4>Instructions:</h4>
+            <div class="instructions-mdl">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
+            <button class="unfavBtn" id="unfavBtn1">Unfavorite</button>
         </div>
     </div>
+
+    <div id="userModal" class="modal hide">
+        <span class="close">X</span>
+        <div class="modal-content">
+            <label>personId</label>
+            <input id="personId" type="number" value="1">
+            <label>BookId</label>
+            <input id="bookId" type="number" value="1"><br>
+        </div>
+    </div>
+
 
 </body>
 </html>
