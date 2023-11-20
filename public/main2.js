@@ -1,5 +1,4 @@
 
-
 window.addEventListener('DOMContentLoaded', (event) => {
     init();
     console.log('DOM fully loaded and parsed');
@@ -73,8 +72,9 @@ function initEventListeners(){
         
         // console.log('candidates',aiRecipeObj)
         aiRecipeObj = getSucessRecipes(aiRecipeObj)
-        aiRecipeObj['imagelink'] = await getPexelImage(aiRecipeObj.content.recipe.title)
-        console.log('with imagelink', aiRecipeObj)
+        console.log('airecipeobj title',aiRecipeObj.content.recipe.title)
+        aiRecipeObj.content.recipe['imagelink'] = await getPexelImage(aiRecipeObj.content.recipe.title)
+        // console.log('with imagelink', aiRecipeObj)
 
         console.log('first successful',aiRecipeObj);
 
@@ -153,12 +153,20 @@ function modalOneListeners(){
 
 //  ------------------------------------------------------- API ROUTE FUNCTIONS
 // http://localhost:3000/api/pexel/image/cake
+
 async function getPexelImage(term){
-    const url = `${PEXEL_URL}search?query=${term}`
+    const url = `${apiURL}/pexel/image/${term}`
     console.log(`getting pexel images from ${url}`)
 
     try{
-        const response = await fetch(url)
+        const response = await fetch(url,{
+            method: 'GET',
+            mode: 'cors',
+            header:{
+                'Access-Control-Allow-Origin':'*',
+                'Access-Control-Allow-Methods':'GET, POST'
+            }
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -326,6 +334,7 @@ function renderMainContent(obj){
     `
 
     displayCtn.innerHTML = displayHTML;
+    favBtnListeners();
 }
 
 // TODO last left off images

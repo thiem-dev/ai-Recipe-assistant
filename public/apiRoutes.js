@@ -39,7 +39,9 @@ app.get('/api/pexel/image/:term', async (req, res) => {
     
     fetch(url, {
         headers: {
-            'Authorization': process.env.PEXEL_API_KEY
+            'Authorization': process.env.PEXEL_API_KEY,
+            'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Methods':'GET, POST'
         }
     })
     .then(response => {
