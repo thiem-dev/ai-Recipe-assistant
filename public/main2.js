@@ -1,3 +1,5 @@
+
+
 window.addEventListener('DOMContentLoaded', (event) => {
     init();
     console.log('DOM fully loaded and parsed');
@@ -6,6 +8,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 let apiURL = `https://recipebook1.onrender.com/api`;
 let myAiService_URL = `https://bardtest1.onrender.com/api`;
+let PEXEL_URL = `https://api.pexels.com/v1/`
 // let books = [];
 let bookRecipesObj = {};
 let aiRecipeObj = {}
@@ -67,8 +70,12 @@ function initEventListeners(){
         iElem.recipeDisplayCtn.classList.add('hide');
 
         aiRecipeObj = await getAiRecipeData(inputObj)
+        
         // console.log('candidates',aiRecipeObj)
         aiRecipeObj = getSucessRecipes(aiRecipeObj)
+        aiRecipeObj['imagelink'] = await getPexelImage(aiRecipeObj.content.recipe.title)
+        console.log('with imagelink', aiRecipeObj)
+
         console.log('first successful',aiRecipeObj);
 
         renderMainContent(aiRecipeObj);
@@ -145,12 +152,31 @@ function modalOneListeners(){
 
 
 //  ------------------------------------------------------- API ROUTE FUNCTIONS
+// http://localhost:3000/api/pexel/image/cake
+async function getPexelImage(term){
+    const url = `${PEXEL_URL}search?query=${term}`
+    console.log(`getting pexel images from ${url}`)
+
+    try{
+        const response = await fetch(url)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        const imgData = data.photos[0].src.original
+        console.log('GET success', data)
+        return imgData;
+    } catch(error) {
+        console.error('Error during POST request:', error);
+    }
+}
+
 
 // for route: https://bardtest1.onrender.com/api/ai/recipe
 
 async function getAiRecipeData(obj){
     const url = `${myAiService_URL}/ai/recipe`
-    console.log(`getting from recipes from ${url}`)
+    console.log(`getting recipes from ${url}`)
     try{
         const response = await fetch(url, {
           method: 'POST',
@@ -283,7 +309,7 @@ function renderMainContent(obj){
     let displayHTML = `
                 <div class="recipeImgCtn">
                     <span id="heartIcon" class="material-symbols-outlined ">favorite</span>
-                    <img class="recipeImg" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
+                    <img class="recipeImg" src="${recipe.imagelink}" alt="chickenShawarma1">
                 </div>
                 <h1 class="recipeTitle">${recipe.title}</h1>
                 <div class="recipeDescription">${recipe.description}</div>
