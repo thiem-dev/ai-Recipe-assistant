@@ -7,6 +7,7 @@
     --main-color: #A8CA22ff;
     --accent1: rgba(168, 202, 34, 0.712);
     --accent2: rgba(168, 202, 34, 0.39);
+    --accent3: rgba(48, 58, 10, 0.753);
     --main-color2: #EBCA3B;
     --main-color3: #7EEB3B;
     --bg1: #222222ff;
@@ -14,6 +15,7 @@
     --bg2: #2D2D2Dff;
     --bg-accent1: #4C4C4Cff;
     --bg-accent2: rgba(76, 76, 76, 0.692);
+    --off-white: #f3f3f369;
 }
 
 /* sets all to defaults */
@@ -31,7 +33,7 @@
     flex-flow: row wrap;
     justify-content: space-between;
     background-color: var(--bg1);
-    color: var(--bg1-offset);
+    color: var(--off-white);
     align-items: center;
     padding:1rem;
 }
@@ -120,9 +122,10 @@
     height: 4rem;
     width: 4rem;
     border: 1px solid black;
-    background-color: var(--main-color);
     border-radius: 10rem;
     transition: .5s all ease;
+    background-color: #f3f3f369;
+    box-shadow: 3px 5px 9px gray;
 }
 
 #searchIcon{
@@ -134,9 +137,10 @@
 }
 
 #ingredientInput{
-    background-color: rgba(128, 128, 128, 0.253);
     border-radius:1rem;
     padding:1rem;
+    background-color: #f3f3f369;
+    box-shadow: 3px 5px 9px gray;
 }
 
 /* ------------------------------ CONTENT CTN */
@@ -261,11 +265,12 @@ hr.divider1{
     display:flex;
     flex-flow: column nowrap;
     flex-basis: 200px;
-    background-color: var(--accent2);
+    background-color: #f3f3f369;
     border-radius: 2rem;
     height:100vh;
     overflow-y: auto;
     z-index:100;
+    box-shadow: 3px 5px 9px gray;
 }
 aside::-webkit-scrollbar {
     display: none; /* Hide the scrollbar in WebKit browsers */
@@ -350,7 +355,33 @@ aside::-webkit-scrollbar {
     display:flex;
     align-items: center;
     flex-flow: column wrap;
-    justify-content: center;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.description-mdl{
+    margin-top: 1rem;
+}
+
+.line1{
+    border: 1px solid gray;
+    width: 70%;
+    margin: 1rem auto;
+}
+
+.ingredients-mdl{
+    margin-top: 2rem;
+    margin: 2rem 1rem;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.instructions-mdl{
+    margin-top: 2rem;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
 }
 
 .close {

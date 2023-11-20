@@ -375,6 +375,23 @@ function renderModalOne(id){
     const modalOneCtn = document.querySelector('#modalOneCtn');
     const bkPage = bookRecipesObj[id];
     modalOneCtn.innerHTML = ``;
+    let ingredientsHTML = ``
+    let instructionsHTML = ``
+
+    const ingredientsArr = bkPage.ingredients.split(', ');
+    const instructionArr = bkPage.instructions.split('Step');
+
+    // Loop through the array and create an li element for each value
+    ingredientsArr.forEach(value => {
+        // Create an li element
+        ingredientsHTML+=`<li>${value}</li>`;
+    });
+
+    instructionArr.forEach(value => {
+        // Create an li element
+        instructionsHTML+=`<li>${value}</li>`;
+    });
+
     let contentHTML = `
                 <img class="img-mdl" src="${bkPage.imagelink}" alt="${bkPage.title}">
                 <h2 class="title-mdl">${bkPage.title}</h2>
@@ -382,13 +399,14 @@ function renderModalOne(id){
                 <div class="description-mdl">
                     ${bkPage.description}
                 </div><br>
+                <hr class="line1">
                 <h3>Ingredients:</h3>
                 <div class="ingredients-mdl">
-                    ${bkPage.ingredients}
+                    ${ingredientsHTML}
                 </div><br>
                 <h4>Instructions:</h4>
                 <div class="instructions-mdl">
-                    ${bkPage.instructions}
+                    ${instructionsHTML}
                 </div>
                 <button class="unfavBtn" id="unfavBtn${id}">Unfavorite</button>
                 `
