@@ -186,7 +186,7 @@ app.post('/api/page', async (req, res) => {
     try{
         const result = await pool.query(
             `INSERT INTO page (title, description, imagelink, ingredients, instructions, book_id, person_id) VALUES
-            ($1,$2,$3,$4,$5)
+            ($1,$2,$3,$4,$5,$6,$7)
             RETURNING *;`, [title, description, imagelink, ingredients, instructions, bookId, personId]
         );
         if(result.rows.length === 0){
