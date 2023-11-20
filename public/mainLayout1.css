@@ -104,10 +104,32 @@
     flex-flow:column wrap;
     justify-content: center;
     margin: 0 auto;
+    text-align: center;
+}
+.inputArea{
+    display:flex;
+    flex-flow: row wrap;
+    margin-bottom: 2rem;
 }
 
 #searchBtn{
-    padding:1rem;
+    padding: 1rem;
+    margin-left: 2rem;
+    margin: auto 2rem;
+    height: 4rem;
+    width: 4rem;
+    border: 1px solid black;
+    background-color: var(--main-color);
+    border-radius: 10rem;
+    transition: .5s all ease;
+}
+
+#searchIcon{
+    font-size:2rem;
+}
+
+#searchBtn:hover{
+    background-color: var(--accent1);
 }
 
 #ingredientInput{
@@ -195,18 +217,34 @@ hr.divider1{
     cursor: pointer;
 
 
-
     transition: .5s all ease;
 }
+
+
 
 #heartIcon:hover {
     color: var(--main-color)
 }
 
-#heartIcon:active {
+#heartIcon.active {
     color:red;
-    /* animation-name: heartFly; */
-    animation-duration: 1s;
+}
+
+/* flying duplicate */
+#heartdummy{
+    position:absolute;
+    top:1rem;
+    right:1rem;
+    font-size:4rem;
+    color:red;
+    z-index:-1;
+    transition: 1s all ease;
+}
+
+#heartdummy.active{
+    z-index:100;
+    animation-name: heartFly;
+    animation-duration: 2s;
 }
 
 /* -------------------------------------------------------------- ASIDE SAVED GALLERY  */
@@ -268,8 +306,9 @@ aside::-webkit-scrollbar {
 
 /*-------------------------------------------------------------------- UTILITY CLASSES */
 
+/* don't over use important, but in this case it's necessary */
 .hide{
-    display:none
+    display:none !important;
 }
 
 /* .hideCard{

@@ -11,6 +11,7 @@ let bookRecipesObj = {};
 let aiRecipeObj = {}
 // let currentPersonId = 1; 
 let currentBookId = 1;
+let currentModalElem = null;
 
 //only for persistent buttons
 const interactiveElements = {
@@ -22,7 +23,7 @@ const interactiveElements = {
     personId: `#personId`,
     bookId: `#bookId`,
     loadingGif: `#loadingGif`,
-    heartIcon: `heartIcon`,
+    heartIcon: `#heartIcon`,
 }
 
 const iElem = interactiveElements;
@@ -38,8 +39,8 @@ async function init(){
     renderAsideThumbs();
 
     sideBarEventListeners();
-    // userRecipeCardListeners();
-    // initFavCardListeners();
+
+    favBtnListeners();
 }
 
 function initQselectors(){
@@ -49,7 +50,8 @@ function initQselectors(){
 }
 
 function initEventListeners(){
-
+    
+    //TODO insert disabled
     iElem.searchBtn.addEventListener('click', async () => {
         const userSearch = document.querySelector('#ingredientInput').value
         // console.log(`search clicked`);
@@ -57,6 +59,9 @@ function initEventListeners(){
         const inputObj = {
             "userInput": userSearch
         }
+
+        userSearch.disabled = true;
+        iElem.searchBtn.disabled = true;
 
         iElem.loadingGif.classList.remove('hide');
         iElem.recipeDisplayCtn.classList.add('hide');
@@ -70,6 +75,8 @@ function initEventListeners(){
 
         iElem.recipeDisplayCtn.classList.remove('hide');
         iElem.loadingGif.classList.add('hide');
+        userSearch.disabled = false;
+        iElem.searchBtn.disabled = false;
     })
 
     iElem.userIcon.addEventListener('click', () => {
@@ -88,11 +95,23 @@ function initEventListeners(){
 
 }
 
+function favBtnListeners(){
+    //TODO insert favorties
+    iElem.heartIcon.addEventListener('click', async (e) => {
+        heartMain = document.querySelector('#heartIcon');
+        heartdummy = document.querySelector('#heartdummy');
+
+        heartMain.classList.add('active')
+        heartdummy.classList.add('active')
+    })
+}
+
 function sideBarEventListeners(){
     const thumbCards = document.querySelectorAll('.thumbCard')
     
     thumbCards.forEach(elem => {
         elem.addEventListener('click', async(e) => {
+            currentModalElem = e.target.parentElement; //holds elem for deleting
             const id = String(e.target.parentElement.id).split('thumbCard')[1]
             console.log('thumb clicked',id)
             iElem.modalOne.classList.remove('hide');
@@ -100,6 +119,28 @@ function sideBarEventListeners(){
         })
     })
 
+}
+
+function modalOneListeners(){
+    const unfavBtn = document.querySelector('.unfavBtn')
+
+    unfavBtn.addEventListener('click', (e) => {
+        const unfavid = String(e.target.id).split('unfavBtn')[1]
+        console.log('unfavBtn id:', unfavid)
+
+        console.log(currentModalElem)
+
+        const prompt = `Are you sure you want to delete ${bookRecipesObj[unfavid].title} page`
+        if(confirm(prompt) === true){
+            // deleteRecipePage(unfavid)
+            currentModalElem.classList.add('hide') //hides it from user without querying server
+            console.log('deleted',unfavid)
+            closeModal();
+
+        } else{
+            return; //do nothing
+        }
+    })
 }
 
 
@@ -128,7 +169,7 @@ async function getAiRecipeData(obj){
     } catch(error) {
         console.error('Error during POST request:', error);
     }
-  }
+}
 
 async function getRecipesByBookId(id){
     let url = `${apiURL}/book/${id}/pages`
@@ -203,7 +244,7 @@ function renderAsideThumbs(){
     let cardHTML = ``
     for(let [indexR, bkPage] of Object.entries(bookRecipesObj)){
         cardHTML += `
-                <div id="thumbCard${indexR}" class="thumbCard">
+                <div id="thumbCard${bkPage.id}" class="thumbCard">
                     <img class="imgThumb" src="${bkPage.imagelink}" alt="${bkPage.title}">
                     <div class="thumbTitle">${bkPage.title}</div>
                 </div>
@@ -241,8 +282,7 @@ function renderMainContent(obj){
     displayCtn.innerHTML = ``
     let displayHTML = `
                 <div class="recipeImgCtn">
-                    <span id="heart-icon" class="material-symbols-outlined ">favorite</span>
-                    <!-- <div class="heart-icon">&#9829</div> -->
+                    <span id="heartIcon" class="material-symbols-outlined ">favorite</span>
                     <img class="recipeImg" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
                 </div>
                 <h1 class="recipeTitle">${recipe.title}</h1>
@@ -286,29 +326,9 @@ function renderModalOne(id){
                 `
     
     modalOneCtn.innerHTML = contentHTML;
-}
 
+    modalOneListeners();
 
-function renderRecipeData(){
-    const recipesCtn = document.querySelector('.recipes-ctn')
-    // const recipe = bookRecipesObj;
-
-    recipesCtn.innerHTML = ``
-    let cardHTML = ``
-
-
-    for(let [indexR, bkPage] of Object.entries(bookRecipesObj)){
-        // console.log(`recipe`, recipe.title)
-        cardHTML += `
-            <div class="recipeCard" id="card${bkPage.id}">
-                <div class="title">${bkPage.title}</div>
-                <div class="description">${bkPage.description}</div>
-                <button class="seeRecipeBtn" id="seeRecipeBtn${bkPage.id}">See Recipe</button>
-                <button class="unfavBtn" id="unfavBtn${bkPage.id}">Unfavorite</button>
-            </div>`;
-    }
-    recipesCtn.innerHTML = cardHTML;
-    userRecipeCardListeners();
 }
 
 function renderModalData(id){

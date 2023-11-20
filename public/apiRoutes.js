@@ -2,6 +2,8 @@ import express from 'express';
 import pg from 'pg';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { createClient } from 'pexels';
+
 
 dotenv.config();
 
@@ -13,11 +15,68 @@ const pool = new Pool({
     connectionString: process.env.DB_URL,
 });
 
+const PEXEL_CLIENT = createClient(process.env.PEXEL_API_KEY);
+
 //  ------------------------------------------------------------ MIDDLEWARE
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'))
+
+
+
+// ------------------------------------------------------------ PEXEL ROUTES
+
+app.get('/api/pexel/image/:term', async (req, res) => {
+    
+    const { term } = req.params
+    
+    // term = 'cake'
+
+    const url = `https://api.pexels.com/v1/search?query=${term}`
+    
+    console.log('getting images from', url);
+    
+    fetch(url, {
+        headers: {
+            'Authorization': process.env.PEXEL_API_KEY
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Process the data (array of photos)
+        // console.log(data);
+        res.send(data);
+        // You can now use the data to display images or perform other actions
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    
+});
+
+app.get('/api/pexelTwo/image/:term', async (req, res) => {
+    
+    // const { term } = req.params
+    
+    const term = 'cake'
+    
+    try{
+        PEXEL_CLIENT.photos.search({ term , per_page: 1 }).then(photos => {
+            console.log(photos)
+        });
+        // res.status(201).send(result);
+    } catch (error){
+        console.log(error)
+        res.status(400).json(error)
+    }
+});
 
 
 //  ------------------------------------------------------------ API ROUTES
