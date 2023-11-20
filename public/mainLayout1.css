@@ -22,6 +22,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'DM Sans', sans-serif;
+    transition: .5s all ease;
 }
 
 /* ------------------------------------------------------------------------ NAV CONTENT */
@@ -331,7 +332,7 @@ aside::-webkit-scrollbar {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
-
+    z-index:150;
 }
 
 .img-mdl{
