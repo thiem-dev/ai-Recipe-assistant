@@ -10,26 +10,30 @@
 </head>
 <body>
 
+    <div class="topNavCtn">
+        <div class="navBox1">
+            <img class="logo" src="../assets/recipeLogo1.png"></img>
+            Recipe Hero 
+            <span class="subText">Ai-powered CookBook</span>
+        </div>
+        <ul class="navBox2">
+            <li class="navItems">About</li>
+            <li class="navItems">CookBook</li>
+            <li class="navItems" id="iconItem">
+                <img src="../assets/userIconSvg.svg" alt="user icon">
+            </li>
+        </ul>
+
+    </div> <!-- end topNavCtn -->
+
     <div class="mainCtn">
-        <div class="topNavCtn">
-            <div class="navBox1">
-                <img class="logo" src="../assets/recipeLogo1.png"></img>
-                Recipe Hero 
-                <span class="subText">Ai-powered CookBook</span>
-            </div>
-            <ul class="navBox2">
-                <li class="navItems">About</li>
-                <li class="navItems">CookBook</li>
-                <li class="navItems" id="iconItem">
-                    <img src="../assets/userIconSvg.svg" alt="user icon">
-                </li>
-            </ul>
-
-        </div> <!-- end topNavCtn -->
-
-
-
         <div class="contentCtn">
+            <h3>Ingredient Input Section</h3>
+            <label>Input your Ingredients</label><br>
+            <textarea id="ingredientInput" name="ingredientInput" rows="4" cols="200" placeholder="carrots, chicken, potatoes..."></textarea><br>
+            <!-- <input id="userInput" type="text" placeholder="type in your ingredients here"> -->
+            <button id="searchBtn">Search</button>
+
             <div class="loading hide">
                 <h1 class="loadingTitle">Creating recipes...</h1>
                 <img src="../assets/kirby-loading.gif" alt="">
@@ -38,23 +42,55 @@
             <div class="recipeImgCtn">
                 <span id="heart-icon" class="material-symbols-outlined ">favorite</span>
                 <!-- <div class="heart-icon">&#9829</div> -->
-                <img class="recipeImg" src="../assets/chickenSwarma1.jpg" alt="chickenSwarma1">
+                <img class="recipeImg" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
             </div>
-            <h1 class="recipeTitle">Chicken Swarma</h1>
-            <div class="recipeDescription">Do est elit quis deserunt ut adipisicing laborum ipsum nisi nostrud.</div>
-            <div class="recpeInstructions">
-                
-                Dolor commodo non deserunt aute commodo aliqua do irure elit eu eiusmod non aliquip laborum. Do laboris Lorem est minim cupidatat consequat enim minim irure. Excepteur ipsum aliquip ut exercitation voluptate tempor. Ex et cupidatat tempor esse tempor ea aute culpa aute. Dolor dolor mollit sunt enim est nisi consectetur.</div>
-        </div>
+            <h1 class="recipeTitle">Chicken Shawarma</h1>
+            <div class="recipeDescription">A delicious and flavorful Middle Eastern dish made with chicken, spices, and pita bread</div>
+            <hr class="divider1">
+            <h2>Ingredients</h2>
+            <ul class="ingredients">
+                <li>"2 cups carrots, sliced",</li>
+                <li>"1 cup green beans, chopped",</li>
+                <li>"2 tablespoons olive oil",</li>
+                <li>"1 clove garlic, minced",</li>
+                <li>"1 teaspoon ginger, grated",</li>
+                <li>"Salt and pepper to taste",</li>
+                <li>"Soy sauce for flavor (optional)"</li>
+            </ul>
+            <br><br>
+            <h2>Instructions:</h2>
+            <ol class="recipeInstructions">
+                <li>Preheat oven to 350 degrees F (175 degrees C).</li>
+                <li>In a large bowl, combine the ham, pork shoulder, Swiss cheese, and pickles.</li>
+                <li>In a small bowl, whisk together the mustard, mayonnaise, olive oil, red wine vinegar, brown sugar, smoked paprika, garlic powder, black pepper, and salt.</li>
+                <li>Spread the mustard mixture on one side of each slice of bread.</li>
+                <li>Divide the ham, pork shoulder, Swiss cheese, and pickles between the bread slices.</li>
+                <li>Top with the remaining bread slices.</li>
+                <li>Bake in the preheated oven for 10-12 minutes, or until the bread is golden brown and the cheese is melted.</li>
+                <li>Let cool for a few minutes before slicing and serving.</li>
+            </ol>
+
+        </div><!-- end contentCtn -->
 
         <div class="savedGallery">
             <div class="card">
-                
+                <img class="imgThumb" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
+                <div class="thumbTitle">Chicken Swarma</div>
+            </div>
+            <div class="card">
+                <img class="imgThumb" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
+                <div class="thumbTitle">Chicken Swarma</div>
+            </div>
+            <div class="card">
+                <img class="imgThumb" src="../assets/chickenShawarma1.jpg" alt="chickenShawarma1">
+                <div class="thumbTitle">Chicken Swarma</div>
             </div>
         </div>
 
 
     </div> <!-- end mainCtn -->
+
+
 
 
 </body>

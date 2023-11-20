@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 let apiURL = `https://recipebook1.onrender.com/api`;
+let myPALMservice_URL = `https://bardtest1.onrender.com/api/ai/recipe`
 let books = [];
 let bookRecipesObj = {};
 let personId = document.querySelector('#personId').value;

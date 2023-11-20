@@ -94,15 +94,19 @@
 
 /* ------------------------------------------------------------------------ MAIN CONTENT */
 
-
+.mainCtn{
+    display:flex;
+}
 
 .contentCtn{
-    width:90%;
     margin: 2rem auto;
     display:flex;
     flex-flow: column wrap;
     align-items: center;
+    flex: 1;
 }
+
+
 
 .recipeImgCtn{
     position:relative;
@@ -113,6 +117,43 @@
     border-radius: 1rem;
 }
 
+.recipeTitle{
+    font-weight: bold;;
+    font-size: 3rem;
+}
+
+.recipeDescription{
+    font-size:1.2rem;
+    margin: 1rem auto;
+}
+
+
+.ingredients{
+    margin-top: 2rem;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+.ingredients li{
+    margin-left:5rem;
+}
+
+hr.divider1{
+    width:80%;
+    margin: 1rem auto;
+}
+
+.recipeInstructions{
+    margin-top:3rem;
+    font-size: 1rem;
+}
+.recipeInstructions li{
+
+}
+
+/* TODO make the animation properties into a separate class and duplicate the heart */
+
+/* heart icon stuff */
 #heart-icon{
     /* fill:red; */
     position:absolute;
@@ -129,24 +170,23 @@
     color: var(--main-color)
 }
 
-/* TODO make the animation properties into a separate class and duplicate the heart */
 #heart-icon:active {
     color:red;
     animation-name: heartFly;
     animation-duration: 1s;
 }
 
-.recipeTitle{
-    font-size: 3rem;
+/* -------------------------------------------------------------- SAVED GALLERY  */
+
+.savedGallery{
+    display:flex;
+    flex-flow: column wrap;
+    flex-basis: 200px;
 }
 
-
-
-.recipeDescription{
-    font-size:2rem;
+.imgThumb{
+    width:100px
 }
-
-
 
 
 /*-------------------------------------------------------------------- UTILITY CLASSES */
