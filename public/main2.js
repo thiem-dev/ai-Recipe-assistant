@@ -10,10 +10,20 @@ let myAiService_URL = `https://bardtest1.onrender.com/api`;
 let PEXEL_URL = `https://api.pexels.com/v1/`
 // let books = [];
 let bookRecipesObj = {};
-let aiRecipeObj = {}
-// let currentPersonId = 1; 
+let currentPersonId = 1; 
 let currentBookId = 1;
 let currentModalElem = null;
+let aiRecipeObj = {
+    "content": {
+        "recipe": {
+            "title": "Chicken Shwarma",
+            "imagelink": "assets/chickenShawarma1.jpg",
+            "description": "A delicious and easy chicken tenders recipe.",
+            "ingredients": "1 pound boneless, skinless chicken breasts, cut into 1-inch pieces, 1 cup all-purpose flour, 1/2 cup cornstarch, 1 teaspoon garlic powder, 1 teaspoon onion powder, 1/2 teaspoon salt, 1/4 teaspoon black pepper, 1 cup buttermilk, 1 egg, 1 tablespoon vegetable oil",
+            "instructions": "Step1. Preheat oven to 400 degrees F (200 degrees C). Line a baking sheet with parchment paper., Step2. In a shallow dish, combine the flour, cornstarch, garlic powder, onion powder, salt, and pepper., Step3. In a separate shallow dish, whisk together the buttermilk and egg., Step4. Dip the chicken pieces into the buttermilk mixture, then coat in the flour mixture., Step5. Place the chicken pieces on the prepared baking sheet., Step6. Bake for 20-25 minutes, or until cooked through and golden brown."
+        }
+    }
+}
 
 //only for persistent buttons
 const interactiveElements = {
@@ -25,7 +35,6 @@ const interactiveElements = {
     personId: `#personId`,
     bookId: `#bookId`,
     loadingGif: `#loadingGif`,
-    heartIcon: `#heartIcon`,
 }
 
 const iElem = interactiveElements;
@@ -74,7 +83,7 @@ function initEventListeners(){
         aiRecipeObj = getSucessRecipes(aiRecipeObj)
         console.log('airecipeobj title',aiRecipeObj.content.recipe.title)
         aiRecipeObj.content.recipe['imagelink'] = await getPexelImage(aiRecipeObj.content.recipe.title)
-        // console.log('with imagelink', aiRecipeObj)
+        console.log('with imagelink', aiRecipeObj)
 
         console.log('first successful',aiRecipeObj);
 
@@ -102,14 +111,35 @@ function initEventListeners(){
 
 }
 
-function favBtnListeners(){
-    //TODO insert favorties
-    iElem.heartIcon.addEventListener('click', async (e) => {
-        heartMain = document.querySelector('#heartIcon');
-        heartdummy = document.querySelector('#heartdummy');
+async function favBtnListeners(){
+    const foodObj = aiRecipeObj.content.recipe
 
-        heartMain.classList.add('active')
-        heartdummy.classList.add('active')
+    heartIcon.addEventListener('click', async (e) => {
+        const heartMain = document.querySelector('#heartIcon');
+        const heartdummy = document.querySelector('#heartdummy');
+
+        if(!heartMain.classList.contains('active')){
+            console.log('does not have active')
+
+            foodObj['personId'] = currentPersonId;
+            foodObj['bookId'] = currentBookId;
+
+            // console.log(foodObj)
+            const insertedRow = await insertRecipePage(foodObj);
+            setTimeout(renderAsideThumbs(), 2000) //delay for 2s
+
+            heartMain.classList.add('active')
+            heartdummy.classList.add('active')
+        } else {
+            console.log('has active')
+            // can't think of way to remove it from the list yet
+
+            // deleteRecipePage(aiRecipeObj.content.recipe.);
+            // setTimeout(renderAsideThumbs(), 2000) //delay for 2s
+            // heartMain.classList.remove('active')
+            // heartdummy.classList.remove('active')
+        }
+
     })
 }
 
@@ -221,11 +251,11 @@ async function getRecipesByBookId(id){
     }
 }
 
-// for route: '/api/person/:personId/book/:bookId/page'
+// for route: post '/api/page'
 async function insertRecipePage(obj){
     let url = `${apiURL}/page`;
     console.log(`inserting page to ${url}`);
-    console.log(obj)
+    console.log('inserting ',obj)
     try{
         const response = await fetch(url, {
             method: 'POST',
@@ -285,7 +315,7 @@ function renderAsideThumbs(){
         `
     }
 
-    console.log(cardHTML)
+    // console.log(cardHTML)
     asideCtn.innerHTML = cardHTML;
 
 }
@@ -317,6 +347,7 @@ function renderMainContent(obj){
     let displayHTML = `
                 <div class="recipeImgCtn">
                     <span id="heartIcon" class="material-symbols-outlined ">favorite</span>
+                    <span id="heartdummy" class="material-symbols-outlined ">favorite</span>
                     <img class="recipeImg" src="${recipe.imagelink}" alt="chickenShawarma1">
                 </div>
                 <h1 class="recipeTitle">${recipe.title}</h1>

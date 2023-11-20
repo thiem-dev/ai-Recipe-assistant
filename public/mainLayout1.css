@@ -216,7 +216,6 @@ hr.divider1{
     text-shadow:2px 2px 5px #6d6d6d;
     cursor: pointer;
 
-
     transition: .5s all ease;
 }
 
@@ -228,6 +227,7 @@ hr.divider1{
 
 #heartIcon.active {
     color:red;
+    z-index:101;
 }
 
 /* flying duplicate */
@@ -236,13 +236,16 @@ hr.divider1{
     top:1rem;
     right:1rem;
     font-size:4rem;
-    color:red;
+    color:white;
+    opacity: 10;
     z-index:-1;
     transition: 1s all ease;
 }
 
 #heartdummy.active{
     z-index:100;
+    opacity: 100;
+    color:red;
     animation-name: heartFly;
     animation-duration: 2s;
 }
@@ -261,6 +264,7 @@ hr.divider1{
     border-radius: 2rem;
     height:100vh;
     overflow-y: auto;
+    z-index:100;
 }
 aside::-webkit-scrollbar {
     display: none; /* Hide the scrollbar in WebKit browsers */

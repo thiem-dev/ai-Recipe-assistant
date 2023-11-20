@@ -182,12 +182,12 @@ app.get('/api/book/:bookId/pages', async (req, res) => {
 
 //insert recipe page into bookId and personId
 app.post('/api/page', async (req, res) => {
-    const { title, description, recipe, personId, bookId } = req.body;
+    const { title, description, imagelink, ingredients, instructions, personId, bookId } = req.body;
     try{
         const result = await pool.query(
-            `INSERT INTO page (title, description, recipe, book_id, person_id) VALUES
+            `INSERT INTO page (title, description, imagelink, ingredients, instructions, book_id, person_id) VALUES
             ($1,$2,$3,$4,$5)
-            RETURNING *;`, [title, description, recipe, bookId, personId]
+            RETURNING *;`, [title, description, imagelink, ingredients, instructions, bookId, personId]
         );
         if(result.rows.length === 0){
             return res.status(400).send(`Could not insert recipe page for person ${personId}, book ${bookId}`)
