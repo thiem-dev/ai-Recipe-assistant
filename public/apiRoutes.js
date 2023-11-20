@@ -168,7 +168,10 @@ app.get('/api/book/:bookId/pages', async (req, res) => {
     try{
         const result = await pool.query(
             `SELECT * FROM page
-            WHERE book_id = $1;`, [bookId]
+            WHERE book_id = $1
+            ORDER BY id DESC;`, [bookId]
+
+            
         )
         if(result.rows.length === 0){
             return res.status(400).send(`Could not get person's recipes ${bookId}`)

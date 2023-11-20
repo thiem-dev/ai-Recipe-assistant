@@ -126,10 +126,12 @@ async function favBtnListeners(){
 
             // console.log(foodObj)
             const insertedRow = await insertRecipePage(foodObj);
-            setTimeout(renderAsideThumbs(), 2000) //delay for 2s
-
+            bookRecipesObj = convertArrToObj(await getRecipesByBookId(currentBookId));
             heartMain.classList.add('active')
             heartdummy.classList.add('active')
+            setTimeout(renderAsideThumbs(), 2000) //delay
+
+
         } else {
             console.log('has active')
             // can't think of way to remove it from the list yet
