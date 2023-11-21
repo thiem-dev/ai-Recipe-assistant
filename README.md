@@ -38,6 +38,7 @@ Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem
         - Getting Cookie: https://www.automatebard.com/2023/04/17/how-to-get-cookie-value-for-bard/ 
         - Basic Hello world: https://bard-ai.js.org/basics/ask/ 
 - **NeonDB**: Free Postgres DB. See: https://neon.tech/
+- **Render.com**: Free place for DB and other webservices. Apps spin down after 10min of inactivity and removed after (90days). See: https://dashboard.render.com/
 - **Expressjs**: Backend web framework for api server. See: https://expressjs.com/
 - **CORS library**: middleware for removing COR restrictions.
 - **json5**: Makes json format more relaxed. Ai JSON responses differ sometimes.  See: https://json5.org/
