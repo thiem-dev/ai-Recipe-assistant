@@ -51,9 +51,6 @@ Link to course notes and future references:
 
 ## Personal Notes
 
-### Workflows guide for myself in future
-- ... ?
-
 ### Future TODO:
 
 - Known Bugs:
