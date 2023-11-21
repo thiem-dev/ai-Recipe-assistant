@@ -1,9 +1,7 @@
-
 window.addEventListener('DOMContentLoaded', (event) => {
     init();
     console.log('DOM fully loaded and parsed');
 });
-
 
 let apiURL = `https://recipebook1.onrender.com/api`;
 let myAiService_URL = `https://bardtest1.onrender.com/api`;
@@ -13,6 +11,8 @@ let bookRecipesObj = {};
 let currentPersonId = 1; 
 let currentBookId = 1;
 let currentModalElem = null;
+
+//sample data
 let aiRecipeObj = {
     "content": {
         "recipe": {
@@ -43,14 +43,12 @@ async function init(){
     initQselectors()
     initEventListeners();
 
-
     // loading asideItems
     bookRecipesObj = convertArrToObj(await getRecipesByBookId(currentBookId));
     console.log(bookRecipesObj)
     renderAsideThumbs();
 
     sideBarEventListeners();
-
     favBtnListeners();
 }
 
@@ -71,24 +69,20 @@ function initEventListeners(){
             "userInput": userSearch
         }
 
+        //toggle element states
         userSearch.disabled = true;
         iElem.searchBtn.disabled = true;
-
         iElem.loadingGif.classList.remove('hide');
         iElem.recipeDisplayCtn.classList.add('hide');
 
+        //get and ai recipe data (1/5 success candidates), images from pexel, and render
         aiRecipeObj = await getAiRecipeData(inputObj)
-        
-        // console.log('candidates',aiRecipeObj)
         aiRecipeObj = getSucessRecipes(aiRecipeObj)
-        console.log('airecipeobj title',aiRecipeObj.content.recipe.title)
         aiRecipeObj.content.recipe['imagelink'] = await getPexelImage(aiRecipeObj.content.recipe.title)
         console.log('with imagelink', aiRecipeObj)
-
-        console.log('first successful',aiRecipeObj);
-
         renderMainContent(aiRecipeObj);
 
+        //toggle element states
         iElem.recipeDisplayCtn.classList.remove('hide');
         iElem.loadingGif.classList.add('hide');
         userSearch.disabled = false;
@@ -108,7 +102,6 @@ function initEventListeners(){
         currentBookId = e.target.value
         //TODO also re-render thumbs
     })
-
 }
 
 async function favBtnListeners(){
@@ -134,14 +127,13 @@ async function favBtnListeners(){
 
         } else {
             console.log('has active')
+            
             // can't think of way to remove it from the list yet
-
             // deleteRecipePage(aiRecipeObj.content.recipe.);
             // setTimeout(renderAsideThumbs(), 2000) //delay for 2s
             // heartMain.classList.remove('active')
             // heartdummy.classList.remove('active')
         }
-
     })
 }
 
@@ -157,7 +149,6 @@ function sideBarEventListeners(){
             renderModalOne(id);
         })
     })
-
 }
 
 function modalOneListeners(){
@@ -166,12 +157,11 @@ function modalOneListeners(){
     unfavBtn.addEventListener('click', (e) => {
         const unfavid = String(e.target.id).split('unfavBtn')[1]
         console.log('unfavBtn id:', unfavid)
-
-        console.log(currentModalElem)
+        // console.log(currentModalElem)
 
         const prompt = `Are you sure you want to delete ${bookRecipesObj[unfavid].title} page`
         if(confirm(prompt) === true){
-            // deleteRecipePage(unfavid)
+            deleteRecipePage(unfavid)
             currentModalElem.classList.add('hide') //hides it from user without querying server
             console.log('deleted',unfavid)
             closeModal();
@@ -184,8 +174,7 @@ function modalOneListeners(){
 
 
 //  ------------------------------------------------------- API ROUTE FUNCTIONS
-// http://localhost:3000/api/pexel/image/cake
-
+//  api/pexel/image/cake
 async function getPexelImage(term){
     const url = `${apiURL}/pexel/image/${term}`
     console.log(`getting pexel images from ${url}`)
@@ -213,7 +202,6 @@ async function getPexelImage(term){
 
 
 // for route: https://bardtest1.onrender.com/api/ai/recipe
-
 async function getAiRecipeData(obj){
     const url = `${myAiService_URL}/ai/recipe`
     console.log(`getting recipes from ${url}`)
@@ -237,6 +225,7 @@ async function getAiRecipeData(obj){
     }
 }
 
+// for route: post '/api/book/id/pages'
 async function getRecipesByBookId(id){
     let url = `${apiURL}/book/${id}/pages`
     console.log(`getting from recipes from ${url}`)
@@ -319,7 +308,7 @@ function renderAsideThumbs(){
 
     // console.log(cardHTML)
     asideCtn.innerHTML = cardHTML;
-
+    sideBarEventListeners();
 }
 
 
@@ -412,12 +401,11 @@ function renderModalOne(id){
                 `
     
     modalOneCtn.innerHTML = contentHTML;
-
     modalOneListeners();
 
 }
 
-function renderModalData(id){
+function renderUserModalData(id){
     // bookRecipesObj
     const modalCtn = document.querySelector('.modal-content')
     const bkPage = bookRecipesObj[id]
@@ -437,7 +425,6 @@ function renderModalData(id){
 }
 
 //  ------------------------------------------------------- UTIL FUNCTIONS
-
 
 //converts arr into obj, so delete/inserts don't move the reference
 //also just don't reference things by arr index unless it's a card
@@ -462,10 +449,7 @@ function getSucessRecipes(recipes){
     return firstSuccessfulRecipe;
 }
 
-
 // ------------------------------------------------------------- MODAL FUNCTIONS
-
-// TODO: toggle the class instead
 
 function closeModal() {
     document.getElementById('modalOne').classList.add('hide');
