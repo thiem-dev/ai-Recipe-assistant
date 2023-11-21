@@ -27,7 +27,7 @@ Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem
 Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem/NextJS13-scott-tut/main/assets/NextJS13-todo-ss1.png" width="1200" height="500">`
 
 ## Tech used:
-- PALM2 API:
+- PALM2 ai API:
   - Where to get API key: https://makersuite.google.com/app/apikey 
   - Is it free? Yes, sorta: https://ngyibin.medium.com/how-to-get-access-to-googles-palm-2-large-language-model-21379f27c078#:~:text=At this stage%2C you may,use%2C unlike GPT-4. 
   - Basic Hello World: https://developers.generativeai.google/tutorials/text_node_quickstart 
