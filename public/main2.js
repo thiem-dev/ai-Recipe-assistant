@@ -384,7 +384,6 @@ function renderModalOne(id){
     let contentHTML = `
                 <img class="img-mdl" src="${bkPage.imagelink}" alt="${bkPage.title}">
                 <h2 class="title-mdl">${bkPage.title}</h2>
-                <h3>Description:</h3>
                 <div class="description-mdl">
                     ${bkPage.description}
                 </div><br>
