@@ -40,7 +40,7 @@ Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem
 - **NeonDB**: Free Postgres DB. See: https://neon.tech/
 - **Render.com**: Free place for DB and other webservices. Apps spin down after 10min of inactivity and removed after (90days). See: https://dashboard.render.com/
 - **Expressjs**: Backend web framework for api server. See: https://expressjs.com/
-- **CORS library**: middleware for removing COR restrictions.
+- **CORS library**: middleware for removing COR restrictions. See: https://www.npmjs.com/package/cors
 - **json5**: Makes json format more relaxed. Ai JSON responses differ sometimes.  See: https://json5.org/
 - **Pexel Image Api**: Free image api. Restrictions: the API is rate-limited to 200 requests per hour and 20,000 requests per month. See: https://www.pexels.com/api/documentation/#photos-search
   - Also see Unsplash Dev as another image resource: https://unsplash.com/documentation#registering-your-application
