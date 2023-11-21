@@ -1,4 +1,4 @@
-Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem/NextJS13-scott-tut/main/assets/NextJS13-todo-ss1.png" width="1200" height="500">`
+<img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/recipehero1.jpg" width="1200" height="500">
 
 # Overview - An ai powered recipe finder 
 - Made on PERN stack + Google's Palm2 Ai 
@@ -20,10 +20,11 @@ Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem
 ### Example of different app states: 
 
 #### Add to favorites
-Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem/NextJS13-scott-tut/main/assets/NextJS13-todo-ss1.png" width="1200" height="500">`
+<img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/recipehero2.jpg" width="600" height="350">
 
 #### Modal
-Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem/NextJS13-scott-tut/main/assets/NextJS13-todo-ss1.png" width="1200" height="500">`
+<img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/recipehero3-modal.jpg" width="600" height="350">
+
 
 ## Tech used:
 - **PALM2 ai API**:
@@ -63,3 +64,17 @@ Link to course notes and future references:
   - error handling for when ai responses fail
   - add calorie count and serving size?
   - add a health grade/sentiment for the food
+ 
+  ### PALM ai (with my recipe prompts) outputs:
+  - link to my ai testing ground: https://github.com/thiem-dev/bardTest
+  - Response example when calling the api
+
+<img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/aiTesting1.jpg" width="1200" height="500">`
+
+
+## Development process notes:
+- Database Entity Relationship Diagram
+<img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/recipeERD1.jpg" width="600" height="250">`
+
+- First wireframe of web app
+<img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/recipebook%20wireframev1.jpg" width="600" height="250">`
