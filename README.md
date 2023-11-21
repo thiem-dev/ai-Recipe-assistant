@@ -16,7 +16,6 @@ Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem
 
 - Basic CRUD functionality of recipe items. 
   - get all recipes on sidebar, get one recipe from ai search, save one recipe, update user book, delete recipe item
-- 
 
 ### Example of different app states: 
 
@@ -30,6 +29,7 @@ Placeholder for image`<img src="https://raw.githubusercontent.com/business-thiem
 - PALM2 ai API:
   - Where to get API key: https://makersuite.google.com/app/apikey 
   - Is it free? Yes, sorta: https://ngyibin.medium.com/how-to-get-access-to-googles-palm-2-large-language-model-21379f27c078#:~:text=At this stage%2C you may,use%2C unlike GPT-4. 
+  - Google Cloud Console: for managing/view compute/usage stats https://console.cloud.google.com/ 
   - Basic Hello World: https://developers.generativeai.google/tutorials/text_node_quickstart 
   - Why not use Bard?
     - It doesn't consistently work with its cookie system: 
