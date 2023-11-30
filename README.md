@@ -1,7 +1,7 @@
 <img src="https://github.com/thiem-dev/recipe-book1/blob/main/siteImages/recipehero1.jpg" width="1200" height="500">
 
 # Overview - An ai powered recipe finder 
-- Made on PERN stack + Google's Palm2 Ai 
+- Made on Postgres, Express, Node tech stack + Google's Palm2 Ai 
 - Link to App: https://recipebook1.onrender.com/ 
   - If site is down (90 day life cycle on render.com) - let the code monkey know to redeploy. Latest Deploy (17 Nov, 2023)
 
